@@ -1,4 +1,9 @@
 from collections import defaultdict
+try:
+    from functools import cache
+except ImportError:
+    from functools import lru_cache
+    cache = lru_cache(None)
 import heapq
 
 class Dijkstra:
@@ -10,6 +15,7 @@ class Dijkstra:
     def distance_to(self, target):
         return self.distances[target]
 
+    @cache
     def path_to(self, target):
         path = []
         node = target
